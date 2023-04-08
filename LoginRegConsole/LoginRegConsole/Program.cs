@@ -15,9 +15,9 @@
 
             string choice = string.Empty;
 
+            Console.WriteLine("\nWelcome to user login/register app");
             do
             {
-                Console.WriteLine("\nWelcome to user login/register app");
                 Console.WriteLine("What you want to do\n" +
                     "1-Login\n" +
                     "2-Register\n" +
@@ -63,7 +63,7 @@
                     default:
                         break;
                 }
-            } while (choice != "3" );
+            } while (choice != "3");
 
         }
     }
@@ -72,10 +72,10 @@
     {
         public bool IsLengthBeetween(int min, int max, string input)
         {
-            if (input.Length > max && input.Length < min) return false;
+            if (input.Length > max || input.Length < min) return false;
             return true;
         }
-        public bool EmailValidation(string eMail, List<User> users)
+        public bool EmailValidation(string eMail, List<User> users, ref bool exsistingMail)
         {
             for (int i = 0; i < eMail.Length; i++)
             {
@@ -85,7 +85,7 @@
                     {
                         if (user._email == eMail)
                         {
-
+                            exsistingMail = true;
                             return false;
                         }
                     }
@@ -105,25 +105,21 @@
     {
         public User Login(List<User> users)
         {
-            User user = null;
-
             Console.WriteLine("Please enter the email");
             string email = Console.ReadLine();
             Console.WriteLine("Plase enter the password");
             string pass = Console.ReadLine();
 
-
             foreach (User userInDb in users)
             {
                 if (userInDb._email == email && userInDb._password == pass)
                 {
-                    user=userInDb;
-                    return user;
+                    return userInDb;
                 }
             }
             return null;
 
-            
+
         }
 
         public bool Register(List<User> users)
@@ -135,22 +131,38 @@
             string eMail = string.Empty;
             string passwordCheck = string.Empty;
 
-
-            do
+            while (true)
             {
+                const int minLength = 3;
+                const int maxLength = 30;
+
                 Console.WriteLine("Please enter the name");
                 name = Console.ReadLine();
+                if (validation.IsLengthBeetween(minLength, maxLength, name) == true)
+                {
+                    break;
+                }
+                Console.WriteLine($"Length must be beetween {minLength} and {maxLength} ");
 
-            } while (validation.IsLengthBeetween(3, 30, name) == false);
+            }
 
-            do
+            while (true)
             {
+                const int minLength = 5;
+                const int maxLength = 20;
+
                 Console.WriteLine("Please enter the surname");
                 surname = Console.ReadLine();
+                if (validation.IsLengthBeetween(minLength, maxLength, surname) == true)
+                {
+                    break;
+                }
+                Console.WriteLine($"Length must be beetween {minLength} and {maxLength} ");
 
-            } while (validation.IsLengthBeetween(5, 20, surname) == false);
 
-            do
+            }
+
+            while (true)
             {
                 Console.WriteLine("Please enter the password");
                 password = Console.ReadLine();
@@ -158,19 +170,41 @@
                 Console.WriteLine("Please enter the password again");
                 passwordCheck = Console.ReadLine();
 
-            } while (validation.PasswordValidation(password, passwordCheck) == false);
+                if (validation.PasswordValidation(password, passwordCheck) == true)
+                {
+                    break;
+                }
+                Console.WriteLine($"{password} and {passwordCheck} does not match");
 
-            do
+            }
+
+            while (true)
             {
                 Console.WriteLine("Please enter the Email");
                 eMail = Console.ReadLine();
+                bool check = false;
+                if (validation.EmailValidation(eMail, users, ref check) == true)
+                {
+                    break;
+                }
+                else if (check == true)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"{eMail} :email already exsists");
+                    Console.ForegroundColor = ConsoleColor.White;
 
-            } while (validation.EmailValidation(eMail, users) == false);
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Enter Correct length");
+                    Console.ForegroundColor = ConsoleColor.White;
 
-            User user = new User(name,surname,eMail,password,"user");
+                }
+            }
 
+            User user = new User(name, surname, eMail, password, "user");
             users.Add(user);
-            
 
             return true;
         }
@@ -206,7 +240,7 @@
             string password = "123321";
             string role = "admin";
 
-            User user = new User(name,surname,email,password,role);
+            User user = new User(name, surname, email, password, role);
 
             users.Add(user);
 
