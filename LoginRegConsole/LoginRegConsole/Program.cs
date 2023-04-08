@@ -13,12 +13,13 @@ namespace LoginRegConsole
         {
             List<User> users = new List<User>();
             Identity identity = new Identity();
+
             User admin = new User();
             admin.AdminCreationSeed(users);
 
             string choice = string.Empty;
 
-            Console.WriteLine("\nWelcome to user login/register app");
+            Console.WriteLine("Welcome to user login/register app");
             do
             {
                 Console.WriteLine("What you want to do\n" +
@@ -36,18 +37,15 @@ namespace LoginRegConsole
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Information is wrong");
                             Console.ForegroundColor = ConsoleColor.White;
-
                         }
-                        user.ShowInfo();
+                        else
+                        {
+                            user.ShowInfo();
+                        }
                         break;
 
                     case "2":
-                        if (identity.Register(users) == true)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Successfully registered");
-                            Console.ForegroundColor = ConsoleColor.White;
-                        };
+                        identity.Register(users);
                         break;
 
                     default:
@@ -108,11 +106,8 @@ namespace LoginRegConsole
                 }
             }
             return null;
-
-
         }
-
-        public bool Register(List<User> users)
+        public void Register(List<User> users)
         {
             RegistrationHelper registrationHelper = new RegistrationHelper();
 
@@ -120,17 +115,23 @@ namespace LoginRegConsole
             string surname = registrationHelper.SurnameValidation();
             string password = registrationHelper.PasswordValidation();
             string eMail = registrationHelper.EmailValidation(users);
+            const string ROLE_FOR_USER = "user";
 
-            User user = new User(name, surname, eMail, password, "user");
+            User user = new User(name, surname, eMail, password, ROLE_FOR_USER);
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Successfully registered");
+            Console.ForegroundColor = ConsoleColor.White;
+
             users.Add(user);
 
-            return true;
+            
         }
 
     }
     public class RegistrationHelper
     {
-        public Validation _validation=new Validation();
+        public Validation _validation = new Validation();
 
 
 
@@ -217,7 +218,7 @@ namespace LoginRegConsole
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Enter Correct length");
+                    Console.WriteLine("You must have  @ in your Email");
                     Console.ForegroundColor = ConsoleColor.White;
 
                 }
@@ -258,22 +259,23 @@ namespace LoginRegConsole
 
             users.Add(user);
         }
-
         public void ShowInfo()
         {
+            
             if (_role == "admin")
             {
                 Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine($"Welcome to your account, our dear {_name} {_surname}!");
+                Console.WriteLine($"Welcome back, our dear {_name} {_surname}!");
                 Console.ForegroundColor = ConsoleColor.White;
             }
             else if (_role == "user")
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"Welcome to your account {_name} {_surname}!");
+                Console.WriteLine($"Welcome back {_name} {_surname}!");
                 Console.ForegroundColor = ConsoleColor.White;
 
             }
+
         }
 
 
