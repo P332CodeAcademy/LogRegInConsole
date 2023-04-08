@@ -1,4 +1,7 @@
-﻿namespace LoginRegConsole
+﻿using System.Data;
+using System.Xml.Linq;
+
+namespace LoginRegConsole
 {
     internal class Program
     {
@@ -35,19 +38,7 @@
                             Console.ForegroundColor = ConsoleColor.White;
 
                         }
-                        else if (user._role == "admin")
-                        {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            Console.WriteLine($"Welcome back dear admin {user._name} ");
-                            Console.ForegroundColor = ConsoleColor.White;
-
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine($"Welcome {user._name},{user._surname}");
-                            Console.ForegroundColor = ConsoleColor.White;
-                        }
+                        user.ShowInfo();
                         break;
 
                     case "2":
@@ -56,7 +47,6 @@
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Successfully registered");
                             Console.ForegroundColor = ConsoleColor.White;
-
                         };
                         break;
 
@@ -124,44 +114,71 @@
 
         public bool Register(List<User> users)
         {
-            Validation validation = new Validation();
-            string name = string.Empty;
-            string surname = string.Empty;
-            string password = string.Empty;
-            string eMail = string.Empty;
-            string passwordCheck = string.Empty;
+            RegistrationHelper registrationHelper = new RegistrationHelper();
 
+            string name = registrationHelper.NameValidation();
+            string surname = registrationHelper.SurnameValidation();
+            string password = registrationHelper.PasswordValidation();
+            string eMail = registrationHelper.EmailValidation(users);
+
+            User user = new User(name, surname, eMail, password, "user");
+            users.Add(user);
+
+            return true;
+        }
+
+    }
+    public class RegistrationHelper
+    {
+        public Validation _validation=new Validation();
+
+
+
+        public string NameValidation()
+        {
+            string name = string.Empty;
             while (true)
             {
-                const int minLength = 3;
-                const int maxLength = 30;
+
+                const int MAX_LENGTH_NAME = 3;
+                const int MİN_LENGTH_NAME = 30;
 
                 Console.WriteLine("Please enter the name");
                 name = Console.ReadLine();
-                if (validation.IsLengthBeetween(minLength, maxLength, name) == true)
+                if (_validation.IsLengthBeetween(MAX_LENGTH_NAME, MİN_LENGTH_NAME, name) == true)
                 {
-                    break;
+                    return name;
                 }
-                Console.WriteLine($"Length must be beetween {minLength} and {maxLength} ");
+                Console.WriteLine($"Length must be beetween {MAX_LENGTH_NAME} and {MİN_LENGTH_NAME} ");
 
             }
+        }
+        public string SurnameValidation()
+        {
 
+            string surname = string.Empty;
             while (true)
             {
-                const int minLength = 5;
-                const int maxLength = 20;
+                const int MİN_LENGTH_SURNAME = 5;
+                const int MAX_LENGTH_SURNAME = 20;
 
                 Console.WriteLine("Please enter the surname");
                 surname = Console.ReadLine();
-                if (validation.IsLengthBeetween(minLength, maxLength, surname) == true)
+
+                if (_validation.IsLengthBeetween(MİN_LENGTH_SURNAME, MAX_LENGTH_SURNAME, surname) == true)
                 {
-                    break;
+                    return surname;
                 }
-                Console.WriteLine($"Length must be beetween {minLength} and {maxLength} ");
+                Console.WriteLine($"Length must be beetween {MİN_LENGTH_SURNAME} and {MAX_LENGTH_SURNAME} ");
 
 
             }
 
+        }
+        public string PasswordValidation()
+        {
+            string password = string.Empty;
+            string passwordCheck = string.Empty;
             while (true)
             {
                 Console.WriteLine("Please enter the password");
@@ -170,22 +187,25 @@
                 Console.WriteLine("Please enter the password again");
                 passwordCheck = Console.ReadLine();
 
-                if (validation.PasswordValidation(password, passwordCheck) == true)
+                if (_validation.PasswordValidation(password, passwordCheck) == true)
                 {
-                    break;
+                    return password;
                 }
                 Console.WriteLine($"{password} and {passwordCheck} does not match");
 
             }
-
+        }
+        public string EmailValidation(List<User> users)
+        {
+            string eMail = string.Empty;
             while (true)
             {
                 Console.WriteLine("Please enter the Email");
                 eMail = Console.ReadLine();
                 bool check = false;
-                if (validation.EmailValidation(eMail, users, ref check) == true)
+                if (_validation.EmailValidation(eMail, users, ref check) == true)
                 {
-                    break;
+                    return eMail;
                 }
                 else if (check == true)
                 {
@@ -202,13 +222,7 @@
 
                 }
             }
-
-            User user = new User(name, surname, eMail, password, "user");
-            users.Add(user);
-
-            return true;
         }
-
     }
     public class User
     {
@@ -243,8 +257,25 @@
             User user = new User(name, surname, email, password, role);
 
             users.Add(user);
-
         }
+
+        public void ShowInfo()
+        {
+            if (_role == "admin")
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine($"Welcome to your account, our dear {_name} {_surname}!");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+            else if (_role == "user")
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"Welcome to your account {_name} {_surname}!");
+                Console.ForegroundColor = ConsoleColor.White;
+
+            }
+        }
+
 
     }
 
