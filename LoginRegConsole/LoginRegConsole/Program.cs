@@ -141,16 +141,16 @@ namespace LoginRegConsole
             while (true)
             {
 
-                const int MAX_LENGTH_NAME = 3;
-                const int MİN_LENGTH_NAME = 30;
+                const int MIN_LENGTH_NAME = 3;
+                const int MAX_LENGTH_NAME = 30;
 
                 Console.WriteLine("Please enter the name");
                 name = Console.ReadLine();
-                if (_validation.IsLengthBeetween(MAX_LENGTH_NAME, MİN_LENGTH_NAME, name) == true)
+                if (_validation.IsLengthBeetween(MIN_LENGTH_NAME, MAX_LENGTH_NAME, name) == true)
                 {
                     return name;
                 }
-                Console.WriteLine($"Length must be beetween {MAX_LENGTH_NAME} and {MİN_LENGTH_NAME} ");
+                Console.WriteLine($"Length must be beetween {MIN_LENGTH_NAME} and {MAX_LENGTH_NAME} ");
 
             }
         }
