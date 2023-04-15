@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LoginRegConsole.Admin.Commands.UserManagament
+namespace LoginRegConsole.Shared.Commands
 {
     public class UpdateSettingsCommand
     {
@@ -21,7 +21,7 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             user.Name = updatedName;
             user.Surname = updatedSurname;
             user.Password = updatedPassword;
-            CustomConsole.GreenLine("Succesfully updated!");
+            CustomConsole.GreenLine("Successfully updated!");
         }
     }
 }

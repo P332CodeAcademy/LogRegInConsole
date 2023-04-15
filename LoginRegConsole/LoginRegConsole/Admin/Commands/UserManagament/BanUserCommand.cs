@@ -29,7 +29,7 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             else if (user.Role == "user")
             {
                 user.IsActive = false;
-                CustomConsole.GreenLine($"{user.Name} has succesfully been DELETED!");
+                CustomConsole.GreenLine($"{user.Name} has successfully been DELETED!");
             }
         }
 

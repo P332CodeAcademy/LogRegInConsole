@@ -36,7 +36,7 @@ namespace LoginRegConsole
                         User user = Identity.LoginCommand.Login();
                         if (user == null)
                         {
-                            CustomConsole.GreenLine("Login or Password is wrong");
+                            CustomConsole.RedLine("Login or Password is wrong");
                         }
                         else if (user.IsActive == false)
                         {

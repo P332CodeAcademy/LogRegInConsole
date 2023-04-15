@@ -8,22 +8,19 @@ namespace LoginRegConsole.Database.Models
 {
     public class Message
     {
-        public Message(string subject, string description, User sendingUser, User receivingUser)
-        {
-            Subject = subject;
-            Description = description;
-            SendTime = DateTime.Now;
-            SendingUser = sendingUser;
-            ReceivingUser = receivingUser;
-            IsOpen= false;
-        }
-
-        public string Subject { get; set; }
-        public string Description { get; set; }
+        public string MessageBody { get; set; }
         public DateTime SendTime { get; set; } 
         public User SendingUser { get; set; }   
         public User ReceivingUser { get; set; }
-        public bool IsOpen { get; set; }
+
+        public Message(string subject, User sendingUser, User receivingUser)
+        {
+            MessageBody = subject;
+            SendTime = DateTime.Now;
+            SendingUser = sendingUser;
+            ReceivingUser = receivingUser;
+        }
+
 
 
         

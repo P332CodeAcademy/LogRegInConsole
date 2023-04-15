@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LoginRegConsole.Admin.Commands.MessageSending
 {
-    public class SendMessage
+    public class SendMessageCommand
     {
         public static void Handle(User sendingUser)
         {
@@ -19,11 +19,15 @@ namespace LoginRegConsole.Admin.Commands.MessageSending
             {
                 receivingUser = FindUserByEmail.Handle();
 
-            } while (receivingUser != null);
+            } while (receivingUser == null);
 
-            string subject=Console.ReadLine();
-            string desc = Console.ReadLine();
-            Message message = new Message(subject,desc,sendingUser.Name,receivingUser.Name);
+            
+            Console.WriteLine("Please enter the message");
+            string messageBody = Console.ReadLine();
+
+            Message message = new Message(messageBody,sendingUser,receivingUser);
+            AppDbContext.Messages.Add(message);
+            CustomConsole.GreenLine($"Message has successfully been send from {sendingUser.Email} ==> {receivingUser.Email}");
 
         }
     }

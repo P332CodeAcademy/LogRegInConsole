@@ -1,5 +1,8 @@
-﻿using LoginRegConsole.Admin.Commands.UserManagament;
+﻿using LoginRegConsole.Admin.Commands.MessageSending;
+using LoginRegConsole.Admin.Commands.UserManagament;
 using LoginRegConsole.Database.Models;
+using LoginRegConsole.Extras;
+using LoginRegConsole.Shared.Commands;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,10 +19,7 @@ namespace LoginRegConsole.Admin
 
         public static void Index(User user)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"Welcome back to Admin Dashboard dear {user.Name} {user.Surname}");
-            Console.ForegroundColor = ConsoleColor.White;
-
+            CustomConsole.GreenLine($"Welcome back to Admin Dashboard dear {user.Name} {user.Surname}");
 
             string choice = string.Empty;
 
@@ -33,7 +33,7 @@ namespace LoginRegConsole.Admin
                "5-Update settings\n" +
                "6-Remove user by Email\n" +
                "7-Ban user\n" +
-               "8-Message\n" +
+               "8-Send Message\n" +
                "0-Logout");
 
                 Console.Write("Your Choice:");
@@ -62,7 +62,7 @@ namespace LoginRegConsole.Admin
                         BanUserCommand.Handle();
                         break;
                     case "8":
-                        BanUserCommand.Handle();
+                        SendMessageCommand.Handle(user);
                         break;
 
                     default:
