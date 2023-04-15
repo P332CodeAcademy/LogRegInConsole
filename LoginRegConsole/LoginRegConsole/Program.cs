@@ -2,6 +2,7 @@
 using LoginRegConsole.Client;
 using LoginRegConsole.Database;
 using LoginRegConsole.Database.Models;
+using LoginRegConsole.Extras;
 using LoginRegConsole.Helper;
 using System.Data;
 using System.Xml.Linq;
@@ -26,6 +27,7 @@ namespace LoginRegConsole
                     "1-Login\n" +
                     "2-Register\n" +
                     "3-Exit");
+                Console.Write("Your choice:");
                 choice = Console.ReadLine();
                 switch (choice)
                 {
@@ -34,9 +36,11 @@ namespace LoginRegConsole
                         User user = Identity.LoginCommand.Login();
                         if (user == null)
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Information is wrong");
-                            Console.ForegroundColor = ConsoleColor.White;
+                            CustomConsole.GreenLine("Login or Password is wrong");
+                        }
+                        else if (user.IsActive == false)
+                        {
+                            CustomConsole.RedLine("Your account is banned!");
                         }
                         else if (user.Role == "admin")
                         {

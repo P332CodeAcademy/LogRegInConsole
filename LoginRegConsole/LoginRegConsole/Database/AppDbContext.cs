@@ -12,7 +12,6 @@ namespace LoginRegConsole.Database
 
         public static List<User> AppUsers { get; set; } = new List<User>();
 
-
         static AppDbContext()
         {
             AdminCreationSeed();

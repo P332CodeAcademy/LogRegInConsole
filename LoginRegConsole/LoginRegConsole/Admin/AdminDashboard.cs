@@ -31,8 +31,10 @@ namespace LoginRegConsole.Admin
                "3-Promote to Admin\n" +
                "4-Depromote from Admin\n" +
                "5-Update settings\n" +
-               "6-Remove user\n" +
-               "7-Ban user");
+               "6-Remove user by Email\n" +
+               "7-Ban user\n" +
+               "8-Message\n" +
+               "0-Logout");
 
                 Console.Write("Your Choice:");
                 choice= Console.ReadLine();
@@ -49,6 +51,18 @@ namespace LoginRegConsole.Admin
                         break;
                     case "4":
                         DepromoteFromAdmin.Handle(user);
+                        break;
+                    case "5":
+                        UpdateSettingsCommand.Handle(user);
+                        break;
+                    case "6":
+                        UpdateSettingsCommand.Handle(user);
+                        break;
+                    case "7":
+                        BanUserCommand.Handle();
+                        break;
+                    case "8":
+                        BanUserCommand.Handle();
                         break;
 
                     default:
