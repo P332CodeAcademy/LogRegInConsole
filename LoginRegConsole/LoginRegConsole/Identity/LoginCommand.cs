@@ -19,7 +19,7 @@ namespace LoginRegConsole.Identity
 
             foreach (User userInDb in AppDbContext.AppUsers)
             {
-                if (userInDb._email == email && userInDb._password == pass)
+                if (userInDb.Email == email && userInDb.Password == pass)
                 {
                     return userInDb;
                 }

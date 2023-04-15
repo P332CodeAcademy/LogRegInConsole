@@ -1,4 +1,6 @@
-﻿using LoginRegConsole.Database;
+﻿using LoginRegConsole.Admin;
+using LoginRegConsole.Client;
+using LoginRegConsole.Database;
 using LoginRegConsole.Database.Models;
 using LoginRegConsole.Helper;
 using System.Data;
@@ -36,9 +38,13 @@ namespace LoginRegConsole
                             Console.WriteLine("Information is wrong");
                             Console.ForegroundColor = ConsoleColor.White;
                         }
-                        else
+                        else if (user.Role == "admin")
                         {
-                            user.ShowInfo();
+                            AdminDashboard.Index(user);
+                        }
+                        else if (user.Role == "user")
+                        {
+                            ClientDashboard.Index(user);
                         }
                         break;
 

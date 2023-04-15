@@ -23,7 +23,7 @@ namespace LoginRegConsole.Helper
                 {
                     foreach (User user in AppDbContext.AppUsers)
                     {
-                        if (user._email == eMail)
+                        if (user.Email == eMail)
                         {
                             exsistingMail = true;
                             return false;
