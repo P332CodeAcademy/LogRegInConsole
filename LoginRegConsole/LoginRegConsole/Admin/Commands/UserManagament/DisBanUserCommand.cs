@@ -1,5 +1,4 @@
-﻿using LoginRegConsole.Database;
-using LoginRegConsole.Database.Models;
+﻿using LoginRegConsole.Database.Models;
 using LoginRegConsole.Extras;
 using System;
 using System.Collections.Generic;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LoginRegConsole.Admin.Commands.UserManagament
 {
-    public class BanUserCommand
+    public class DisBanUserCommand
     {
         public static void Handle()
         {
@@ -18,20 +17,15 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             {
                 CustomConsole.RedLine("Invalid email");
             }
-            else if (user.IsActive == false)
+            else if (user.IsActive == true)
             {
-                CustomConsole.RedLine("Alredy banned account");
-            }
-            else if (user.Role == "admin")
-            {
-                CustomConsole.RedLine("You can't ban an admin");
+                CustomConsole.RedLine("Alredy active account");
             }
             else if (user.Role == "user")
             {
-                user.IsActive = false;
-                CustomConsole.GreenLine($"{user.Name} has successfully been BANNED!");
+                user.IsActive = true;
+                CustomConsole.GreenLine($"{user.Name} has successfully been DISBANNED!");
             }
         }
-
     }
 }

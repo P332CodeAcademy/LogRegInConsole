@@ -13,9 +13,9 @@ namespace LoginRegConsole
     {
         static void Main(string[] args)
         {
-            Handler();
+            Handle();
         }
-        public static void Handler()
+        public static void Handle()
         {
 
             string choice = string.Empty;
@@ -32,24 +32,8 @@ namespace LoginRegConsole
                 switch (choice)
                 {
                     case "1":
-
                         User user = Identity.LoginCommand.Login();
-                        if (user == null)
-                        {
-                            CustomConsole.RedLine("Login or Password is wrong");
-                        }
-                        else if (user.IsActive == false)
-                        {
-                            CustomConsole.RedLine("Your account is banned!");
-                        }
-                        else if (user.Role == "admin")
-                        {
-                            AdminDashboard.Index(user);
-                        }
-                        else if (user.Role == "user")
-                        {
-                            ClientDashboard.Index(user);
-                        }
+                        UserConditionChecker.Handle(user);
                         break;
 
                     case "2":

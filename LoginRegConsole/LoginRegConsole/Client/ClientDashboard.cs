@@ -18,7 +18,7 @@ namespace LoginRegConsole.Client
 
         public static void Index(User user)
         {
-            Console.WriteLine($"Welcome back {user.Name} {user.Surname}");
+            CustomConsole.WarningLine($"Welcome back {user.Name} {user.Surname}");
             string choice = string.Empty;
 
             do

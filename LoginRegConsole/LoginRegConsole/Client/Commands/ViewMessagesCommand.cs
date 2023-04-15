@@ -19,7 +19,7 @@ namespace LoginRegConsole.Client.Commands
             {
                 if (message.ReceivingUser.Email == user.Email)
                 {
-                    CustomConsole.WarningLine($"{counter++}.{message.SendingUser.Name} {message.SendingUser.Surname} || {message.MessageBody}");
+                    CustomConsole.WarningLine($"{counter++}.{message.SendingUser.Name} {message.SendingUser.Surname}|| FROM:{message.SendingUser.Email} || {message.MessageBody}");
                 }
             }
 

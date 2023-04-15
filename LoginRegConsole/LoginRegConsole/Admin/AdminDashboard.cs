@@ -2,6 +2,7 @@
 using LoginRegConsole.Admin.Commands.UserManagament;
 using LoginRegConsole.Database.Models;
 using LoginRegConsole.Extras;
+using LoginRegConsole.Identity;
 using LoginRegConsole.Shared.Commands;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,9 @@ namespace LoginRegConsole.Admin
                "5-Update settings\n" +
                "6-Remove user by Email\n" +
                "7-Ban user\n" +
-               "8-Send Message\n" +
+               "8-Disban user\n" +
+               "9-Send Message\n" +
+               "10-Register new User\n" +
                "0-Logout");
 
                 Console.Write("Your Choice:");
@@ -56,13 +59,19 @@ namespace LoginRegConsole.Admin
                         UpdateSettingsCommand.Handle(user);
                         break;
                     case "6":
-                        UpdateSettingsCommand.Handle(user);
+                        RemoveUserByEmailCommand.Handle();
                         break;
                     case "7":
                         BanUserCommand.Handle();
                         break;
                     case "8":
+                        DisBanUserCommand.Handle();
+                        break;
+                    case "9":
                         SendMessageCommand.Handle(user);
+                        break;
+                    case "10":
+                        RegisterCommand.Register();
                         break;
 
                     default:

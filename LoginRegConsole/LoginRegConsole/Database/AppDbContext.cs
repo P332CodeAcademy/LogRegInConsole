@@ -27,10 +27,7 @@ namespace LoginRegConsole.Database
             string role = "admin";
 
             User user = new User(name, surname, email, password, role);
-            User user2 = new User("Ceyhun", "Hacili", "ceka@gmail.com", "123321", "user");
-
             AppDbContext.AppUsers.Add(user);
-            AppDbContext.AppUsers.Add(user2);
         }
 
     }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LoginRegConsole.Services;
+using LoginRegConsole.Extras;
 
 namespace LoginRegConsole.Identity
 {
@@ -21,10 +22,7 @@ namespace LoginRegConsole.Identity
 
             User user = new User(name, surname, eMail, password, ROLE_FOR_USER);
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Successfully registered");
-            Console.ForegroundColor = ConsoleColor.White;
-
+            CustomConsole.GreenLine("Successfully registered");
             AppDbContext.AppUsers.Add(user);
 
 
