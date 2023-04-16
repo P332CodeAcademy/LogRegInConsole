@@ -34,6 +34,10 @@ namespace LoginRegConsole.Database.Models
             IsActive = true;
         }
 
+        public string ShowFullName()
+        {
+            return $"{Name} {Surname}";
+        }
         public void ShowInfo()
         {
 
@@ -53,6 +57,13 @@ namespace LoginRegConsole.Database.Models
 
         }
 
-
+        public bool IsAdmin()
+        {
+            if (Role == "admin")
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

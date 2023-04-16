@@ -7,28 +7,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LoginRegConsole.Helper;
 
 namespace LoginRegConsole.Admin.Commands.MessageSending
 {
-    public class SendMessageCommand
-    {
-        public static void Handle(User sendingUser)
-        {
-            User receivingUser = null;
-            do
-            {
-                receivingUser = FindUserByEmail.Handle();
+	public class SendMessageCommand
+	{
+		public static void Handle(User sendingUser)
+		{
+			User receivingUser = null;
+			string messageBody = string.Empty;
 
-            } while (receivingUser == null);
+			do
+			{
+				receivingUser = FindUserByEmail.Handle();
 
-            
-            Console.WriteLine("Please enter the message");
-            string messageBody = Console.ReadLine();
+			} while (receivingUser == null);
 
-            Message message = new Message(messageBody,sendingUser,receivingUser);
-            AppDbContext.Messages.Add(message);
-            CustomConsole.GreenLine($"Message has successfully been send from {sendingUser.Email} ==> {receivingUser.Email}");
 
-        }
-    }
+			do
+			{
+				Console.WriteLine("Please enter the message");
+				messageBody = Console.ReadLine();
+
+			} while (Validation.IsLengthBeetween(5, 50, messageBody) == false);
+
+			Message message = new Message(messageBody, sendingUser, receivingUser);
+			AppDbContext.Messages.Add(message);
+			CustomConsole.GreenLine($"Message has successfully been send from {sendingUser.Email} ==> {receivingUser.Email}");
+
+		}
+	}
 }

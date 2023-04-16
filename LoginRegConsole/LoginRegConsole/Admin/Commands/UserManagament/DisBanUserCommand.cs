@@ -21,10 +21,10 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             {
                 CustomConsole.RedLine("Alredy active account");
             }
-            else if (user.Role == "user")
+            else if (user.IsAdmin() == false)
             {
                 user.IsActive = true;
-                CustomConsole.GreenLine($"{user.Name} has successfully been DISBANNED!");
+                CustomConsole.GreenLine($"{user.ShowFullName()} has successfully been DISBANNED!");
             }
         }
     }

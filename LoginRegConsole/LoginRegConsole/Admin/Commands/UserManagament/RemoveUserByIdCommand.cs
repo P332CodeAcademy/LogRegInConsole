@@ -26,7 +26,7 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
                             if (item.Role != "admin")
                             {
                                 AppDbContext.AppUsers.Remove(item);
-                                CustomConsole.GreenLine($"{item.Name} {item.Surname} has been removed!");
+                                CustomConsole.GreenLine($"{item.ShowFullName()} has been removed!");
                                 return;
                             }
                             CustomConsole.RedLine("You can't remove admin");

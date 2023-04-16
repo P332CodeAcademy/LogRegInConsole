@@ -18,14 +18,14 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             {
                 CustomConsole.RedLine("Invalid email");
             }
-            else if (user.Role == "admin")
+            else if (user.IsAdmin())
             {
                 CustomConsole.RedLine("You can't remove admin");
             }
-            else if(user.Role== "user")
+            else 
             {
                 AppDbContext.AppUsers.Remove(user);
-                CustomConsole.GreenLine($"{user.Name} has successfully been DELETED!");
+                CustomConsole.GreenLine($"{user.ShowFullName()} has successfully been DELETED!");
             }
 
         }

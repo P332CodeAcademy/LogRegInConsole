@@ -19,14 +19,14 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             {
                 CustomConsole.RedLine("Invalid email");
             }
-            else if(user.Role == "admin")
+            else if(user.IsAdmin())
             {
                 CustomConsole.WarningLine("Alredy Admin!");
             }
-            else if(user.Role =="user")
+            else
             {
                 user.Role = "admin";
-                CustomConsole.GreenLine($"{user.Name} promoted to Admin!");
+                CustomConsole.GreenLine($"{user.ShowFullName()} promoted to Admin!");
             }
         }
 

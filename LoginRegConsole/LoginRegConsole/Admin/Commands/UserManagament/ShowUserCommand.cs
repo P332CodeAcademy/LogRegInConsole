@@ -16,7 +16,7 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
             int counter = 1;
             foreach (User user in AppDbContext.AppUsers)
             {
-                Console.WriteLine($"{counter++} || ID:{user.Id} || Name:{user.Name} || Surname:{user.Surname} || Role:{user.Role} || IsActive:{(user.IsActive ? "Active":"Banned")}");
+                Console.WriteLine($"{counter++} || ID:{user.Id} || Name:{user.ShowFullName()} || Role:{user.Role} || IsActive:{(user.IsActive ? "Active":"Banned")}");
             }
             Console.WriteLine();
         }
