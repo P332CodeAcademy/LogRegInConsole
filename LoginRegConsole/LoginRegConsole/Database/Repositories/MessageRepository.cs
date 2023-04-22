@@ -19,7 +19,7 @@ namespace LoginRegConsole.Database.Repositories
 			{
 				if (message.ReceivingUser.Email == UserService.ActiveUser.Email)
 				{
-					CustomConsole.WarningLine($"{counter++}.{message.SendingUser.ShowFullName()} || FROM:{message.SendingUser.Email} || {message.MessageBody}");
+					CustomConsole.WarningLine($"{counter++}.{message.SendingUser.ShowFullName()} || FROM:{message.SendingUser.Email} || SENDING DATE {$"{message.SendTime.ToString("f")}"} || {message.MessageBody}");
 				}
 			}
 
@@ -29,6 +29,11 @@ namespace LoginRegConsole.Database.Repositories
 			}
 
 
+		}
+
+		public void AddMessage(Message message)
+		{
+			AppDbContext.Messages.Add(message);
 		}
 	}
 }

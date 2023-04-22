@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LoginRegConsole.Services;
 using LoginRegConsole.Extras;
+using LoginRegConsole.Constants;
 
 namespace LoginRegConsole.Identity
 {
@@ -18,11 +19,10 @@ namespace LoginRegConsole.Identity
             string surname = RegistrationHelper.SurnameValidation();
             string password = RegistrationHelper.PasswordValidation();
             string eMail = RegistrationHelper.EmailValidation();
-            const string ROLE_FOR_USER = "user";
 
-            User user = new User(name, surname, eMail, password, ROLE_FOR_USER);
+            User user = new User(name, surname, eMail, password, Roles.USER);
 
-            CustomConsole.GreenLine("Successfully registered");
+            CustomConsole.GreenLine($"{user.Name} {user.Surname} Successfully registered at {user.RegistrationDate.ToString("f")}");
             AppDbContext.AppUsers.Add(user);
 
 

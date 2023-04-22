@@ -82,5 +82,14 @@ namespace LoginRegConsole.Database.Repositories
 			}
 			Console.WriteLine();
 		}
+		public void AddUser(User user)
+		{
+			AppDbContext.AppUsers.Add(user);
+		}
+		public void RemoveUser(User user)
+		{
+			AppDbContext.AppUsers.Remove(user);
+		}
+
 	}
 }

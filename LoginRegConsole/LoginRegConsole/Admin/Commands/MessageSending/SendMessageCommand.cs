@@ -20,6 +20,7 @@ namespace LoginRegConsole.Admin.Commands.MessageSending
 			User receivingUser = null;
 			string messageBody = string.Empty;
 			UserRepository userRep=new UserRepository();
+			MessageRepository messageRepository = new MessageRepository();
 
 			do
 			{
@@ -36,7 +37,7 @@ namespace LoginRegConsole.Admin.Commands.MessageSending
 			} while (Validation.IsLengthBeetween(5, 50, messageBody) == false);
 
 			Message message = new Message(messageBody, UserService.ActiveUser, receivingUser);
-			AppDbContext.Messages.Add(message);
+			messageRepository.AddMessage(message);
 			CustomConsole.GreenLine($"Message has successfully been send from {UserService.ActiveUser.Email} ==> {receivingUser.Email}");
 
 		}

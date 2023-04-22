@@ -1,5 +1,6 @@
 ﻿using LoginRegConsole.Database;
 using LoginRegConsole.Database.Models;
+using LoginRegConsole.Database.Repositories;
 using LoginRegConsole.Extras;
 using LoginRegConsole.Services;
 using System;
@@ -15,6 +16,8 @@ namespace LoginRegConsole.Client.Commands
 
 		public static void Handle()
 		{
+			UserRepository userRepository = new UserRepository();
+			
 			Console.WriteLine("Please enter password for submission.\n" +
 				"If you want to go back enter 1");
 			string pass = Console.ReadLine();
@@ -25,7 +28,7 @@ namespace LoginRegConsole.Client.Commands
 			}
 			else if (pass == UserService.ActiveUser.Password)
 			{
-				AppDbContext.AppUsers.Remove(UserService.ActiveUser);
+				userRepository.RemoveUser(UserService.ActiveUser);	
 				CustomConsole.WarningLine($"{UserService.ActiveUser.ShowFullName()} has successfully been deleted!");
 			}
 			else

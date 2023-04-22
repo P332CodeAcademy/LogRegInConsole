@@ -1,4 +1,6 @@
-﻿using LoginRegConsole.Database.Models;
+﻿using LoginRegConsole.Constants;
+using LoginRegConsole.Database.Models;
+using LoginRegConsole.Database.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ namespace LoginRegConsole.Database
 {
     public class AppDbContext
     {
-
+        public static UserRepository _userRepository = new UserRepository();
         public static List<User> AppUsers { get; set; } = new List<User>();
         public static List<Message> Messages { get; set; } = new List<Message>();
 
@@ -24,10 +26,9 @@ namespace LoginRegConsole.Database
             string surname = "Admin";
             string email = "admin@gmail.com";
             string password = "123321";
-            string role = "admin";
-
-            User user = new User(name, surname, email, password, role);
-            AppDbContext.AppUsers.Add(user);
+            
+            User user = new User(name, surname, email, password, Roles.ADMIN);
+			_userRepository.AddUser(user);
         }
 
     }
