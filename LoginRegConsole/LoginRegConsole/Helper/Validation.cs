@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace LoginRegConsole.Helper
 {
@@ -17,22 +18,25 @@ namespace LoginRegConsole.Helper
         }
         public static bool EmailValidation(string eMail, ref bool exsistingMail)
         {
-            for (int i = 0; i < eMail.Length; i++)
+			string emailPattern = @"^[a-zA-Z0-9]{10,30}@code\.edu\.az$";
+			bool isValidEmail = Regex.IsMatch(eMail, emailPattern);
+			if (isValidEmail is false)
             {
-                if (eMail[i] == '@')
-                {
-                    foreach (User user in AppDbContext.AppUsers)
-                    {
-                        if (user.Email == eMail)
-                        {
-                            exsistingMail = true;
-                            return false;
-                        }
-                    }
-                    return true;
-                }
+                return false;
             }
-            return false;
+            else 
+            {
+				foreach (User user in AppDbContext.AppUsers)
+				{
+					if (user.Email.ToLower() == eMail.ToLower())
+					{
+						exsistingMail = true;
+						return false;
+					}
+				}
+				return true;
+			}
+			
         }
         public static bool PasswordValidation(string password, string passwordCheck)
         {

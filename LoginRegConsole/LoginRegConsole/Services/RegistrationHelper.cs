@@ -92,7 +92,7 @@ namespace LoginRegConsole.Services
                 else
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You must have  @ in your Email");
+                    Console.WriteLine("Correct Email format is { <(10-30 symbols)>@code.edu.az}");
                     Console.ForegroundColor = ConsoleColor.White;
 
                 }
