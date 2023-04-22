@@ -4,6 +4,7 @@ using LoginRegConsole.Database;
 using LoginRegConsole.Database.Models;
 using LoginRegConsole.Extras;
 using LoginRegConsole.Helper;
+using LoginRegConsole.Services;
 using System.Data;
 using System.Xml.Linq;
 
@@ -17,7 +18,6 @@ namespace LoginRegConsole
         }
         public static void Handle()
         {
-
             string choice = string.Empty;
 
             Console.WriteLine("Welcome to user login/register app");
@@ -32,8 +32,8 @@ namespace LoginRegConsole
                 switch (choice)
                 {
                     case "1":
-                        User user = Identity.LoginCommand.Login();
-                        UserConditionChecker.Handle(user);
+                        UserService.ActiveUser = Identity.LoginCommand.Login();
+                        UserConditionChecker.Handle();
                         break;
 
                     case "2":

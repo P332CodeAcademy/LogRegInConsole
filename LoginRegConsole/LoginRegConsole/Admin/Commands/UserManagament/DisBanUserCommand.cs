@@ -1,4 +1,5 @@
 ﻿using LoginRegConsole.Database.Models;
+using LoginRegConsole.Database.Repositories;
 using LoginRegConsole.Extras;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
     {
         public static void Handle()
         {
-            User user = FindUserByEmail.Handle();
+			UserRepository userRepository = new UserRepository();
+			User user = userRepository.FindUserByEmail();
             if (user == null)
             {
                 CustomConsole.RedLine("Invalid email");

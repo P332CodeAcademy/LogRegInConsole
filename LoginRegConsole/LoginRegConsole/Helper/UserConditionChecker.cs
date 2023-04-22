@@ -2,6 +2,7 @@
 using LoginRegConsole.Client;
 using LoginRegConsole.Database.Models;
 using LoginRegConsole.Extras;
+using LoginRegConsole.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +13,23 @@ namespace LoginRegConsole.Helper
 {
     public class UserConditionChecker
     {
-        public static void Handle(User user)
+        public static void Handle()
         {
-            if (user == null)
+            if (UserService.ActiveUser == null)
             {
                 CustomConsole.RedLine("Login or Password is wrong");
             }
-            else if (user.IsActive == false)
+            else if (UserService.ActiveUser.IsActive == false)
             {
                 CustomConsole.RedLine("Your account is banned!");
             }
-            else if (user.Role == "admin")
+            else if (UserService.ActiveUser.Role == "admin")
             {
-                AdminDashboard.Index(user);
+                AdminDashboard.Index();
             }
-            else if (user.Role == "user")
+            else if (UserService.ActiveUser.Role == "user")
             {
-                ClientDashboard.Index(user);
+                ClientDashboard.Index();
             }
         }
     }

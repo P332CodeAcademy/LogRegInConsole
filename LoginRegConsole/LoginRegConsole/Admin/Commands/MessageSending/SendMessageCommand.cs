@@ -8,19 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LoginRegConsole.Helper;
+using LoginRegConsole.Services;
+using LoginRegConsole.Database.Repositories;
 
 namespace LoginRegConsole.Admin.Commands.MessageSending
 {
 	public class SendMessageCommand
 	{
-		public static void Handle(User sendingUser)
+		public static void Handle()
 		{
 			User receivingUser = null;
 			string messageBody = string.Empty;
+			UserRepository userRep=new UserRepository();
 
 			do
 			{
-				receivingUser = FindUserByEmail.Handle();
+				receivingUser = userRep.FindUserByEmail();
 
 			} while (receivingUser == null);
 
@@ -32,9 +35,9 @@ namespace LoginRegConsole.Admin.Commands.MessageSending
 
 			} while (Validation.IsLengthBeetween(5, 50, messageBody) == false);
 
-			Message message = new Message(messageBody, sendingUser, receivingUser);
+			Message message = new Message(messageBody, UserService.ActiveUser, receivingUser);
 			AppDbContext.Messages.Add(message);
-			CustomConsole.GreenLine($"Message has successfully been send from {sendingUser.Email} ==> {receivingUser.Email}");
+			CustomConsole.GreenLine($"Message has successfully been send from {UserService.ActiveUser.Email} ==> {receivingUser.Email}");
 
 		}
 	}

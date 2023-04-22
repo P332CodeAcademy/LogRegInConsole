@@ -2,7 +2,9 @@
 using LoginRegConsole.Admin.Commands.UserManagament;
 using LoginRegConsole.Client.Commands;
 using LoginRegConsole.Database.Models;
+using LoginRegConsole.Database.Repositories;
 using LoginRegConsole.Extras;
+using LoginRegConsole.Services;
 using LoginRegConsole.Shared.Commands;
 using System;
 using System.Collections.Generic;
@@ -14,13 +16,11 @@ namespace LoginRegConsole.Client
 {
     internal class ClientDashboard
     {
-
-
-        public static void Index(User user)
+        public static void Index()
         {
-            CustomConsole.WarningLine($"Welcome back {user.Name} {user.Surname}");
+            CustomConsole.WarningLine($"Welcome back {UserService.ActiveUser.Name} {UserService.ActiveUser.Surname}");
             string choice = string.Empty;
-
+            MessageRepository messageRepository = new MessageRepository(); 
             do
             {
                 Console.WriteLine("What you want to do?\n" +
@@ -34,13 +34,13 @@ namespace LoginRegConsole.Client
                 switch (choice)
                 {
                     case "1":
-                        UpdateSettingsCommand.Handle(user);
+                        UpdateSettingsCommand.Handle();
                         break;
                     case "2":
-                        CloseAccountCommand.Handle(user);
+                        CloseAccountCommand.Handle();
                         return;
                     case "3":
-                        ViewMessagesCommand.Handle(user);
+						messageRepository.ViewMessages();
                         break;
                     default:
                         break;

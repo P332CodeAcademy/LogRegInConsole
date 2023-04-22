@@ -1,8 +1,10 @@
 ﻿using LoginRegConsole.Admin.Commands.MessageSending;
 using LoginRegConsole.Admin.Commands.UserManagament;
 using LoginRegConsole.Database.Models;
+using LoginRegConsole.Database.Repositories;
 using LoginRegConsole.Extras;
 using LoginRegConsole.Identity;
+using LoginRegConsole.Services;
 using LoginRegConsole.Shared.Commands;
 using System;
 using System.Collections.Generic;
@@ -18,12 +20,12 @@ namespace LoginRegConsole.Admin
 
 
 
-        public static void Index(User user)
+        public static void Index()
         {
-            CustomConsole.GreenLine($"Welcome back to Admin Dashboard dear {user.Name} {user.Surname}");
+            CustomConsole.GreenLine($"Welcome back to Admin Dashboard dear {UserService.ActiveUser.Name} {UserService.ActiveUser.Surname}");
 
             string choice = string.Empty;
-
+            UserRepository userRepository= new UserRepository();    
             do
             {
                 Console.WriteLine("What you want to do?\n" +
@@ -44,22 +46,22 @@ namespace LoginRegConsole.Admin
                 switch (choice)
                 {
                     case "1":
-                        ShowUserCommand.Handle();
+						userRepository.ShowUsers();
                         break;
                     case "2":
-                        RemoveUserByIdCommand.Handle();
+						userRepository.RemoveUserById();
                         break;
                     case "3":
                         PromoteToAdmin.Handle();
                         break;
                     case "4":
-                        DepromoteFromAdmin.Handle(user);
+                        DepromoteFromAdmin.Handle();
                         break;
                     case "5":
-                        UpdateSettingsCommand.Handle(user);
+                        UpdateSettingsCommand.Handle();
                         break;
                     case "6":
-                        RemoveUserByEmailCommand.Handle();
+						userRepository.RemoveUserByEmail();
                         break;
                     case "7":
                         BanUserCommand.Handle();
@@ -68,7 +70,7 @@ namespace LoginRegConsole.Admin
                         DisBanUserCommand.Handle();
                         break;
                     case "9":
-                        SendMessageCommand.Handle(user);
+                        SendMessageCommand.Handle();
                         break;
                     case "10":
                         RegisterCommand.Register();

@@ -1,5 +1,7 @@
 ﻿using LoginRegConsole.Database.Models;
+using LoginRegConsole.Database.Repositories;
 using LoginRegConsole.Extras;
+using LoginRegConsole.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,15 +12,16 @@ namespace LoginRegConsole.Admin.Commands.UserManagament
 {
 	public class DepromoteFromAdmin
 	{
-		public static void Handle(User isActiveAdmin)
+		public static void Handle()
 		{
+			UserRepository userRepository = new UserRepository();
 
-			User user = FindUserByEmail.Handle();
+			User user = userRepository.FindUserByEmail();
 			if (user == null)
 			{
 				CustomConsole.RedLine("Invalid email");
 			}
-			else if (user == isActiveAdmin)
+			else if (user == UserService.ActiveUser)
 			{
 				CustomConsole.WarningLine("You cannot depromote yourself to user");
 			}
