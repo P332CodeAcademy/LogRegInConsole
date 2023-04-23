@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace LoginRegConsole.Database.BaseModel
 {
-	public class Human
+	public class BaseEntity
 	{
-		public string Name { get; set; }
-		public string Surname { get; set; }
-
+		protected static int _idCounter { get; set; }
+		public int Id { get; set; }
 	}
 }

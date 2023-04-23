@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace LoginRegConsole.Database.Models
 {
-	public class User : Human
+	public class User : BaseEntity
 	{
-		private static int _idCounter { get; set; }
-		public int Id { get; set; }
+		public string Name { get; set; }
+		public string Surname { get; set; }
 		public string Email { get; set; }
 		public string Password { get; set; }
 		public string Role { get; set; }
@@ -19,7 +19,7 @@ namespace LoginRegConsole.Database.Models
 
 		public User(string name, string surname, string email, string password, string role)
 		{
-			Id = ++_idCounter;
+			Id = ++BaseEntity._idCounter;
 			Name = name;
 			Surname = surname;
 			Email = email;
