@@ -18,7 +18,7 @@ namespace LoginRegConsole.Database.Repositories
 		{
 			Console.Write("Please enter the User email:");
 			string email = Console.ReadLine();
-			foreach (User user in AppDbContext.AppUsers)
+			foreach (User user in GetUsers())
 			{
 				if (user.Email == email)
 				{
@@ -53,7 +53,7 @@ namespace LoginRegConsole.Database.Repositories
 				try
 				{
 					int id = int.Parse(Console.ReadLine());
-					foreach (var item in AppDbContext.AppUsers)
+					foreach (var item in GetUsers())
 					{
 						if (item.Id == id)
 						{
@@ -80,7 +80,7 @@ namespace LoginRegConsole.Database.Repositories
 		public void ShowUsers()
 		{
 			int counter = 1;
-			foreach (User user in AppDbContext.AppUsers)
+			foreach (User user in GetUsers())
 			{
 				Console.WriteLine($"{counter++} || ID:{user.Id} " +
 					$"|| Fullname:{user.ShowFullName()} " +

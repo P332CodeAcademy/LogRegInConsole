@@ -6,11 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using LoginRegConsole.Services;
+using LoginRegConsole.Database.Repositories;
 
 namespace LoginRegConsole.Helper
 {
     public class Validation
     {
+        private static UserRepository userRepository = new UserRepository();    
         public static bool IsLengthBeetween(int min, int max, string input)
         {
             if (input.Length > max || input.Length < min) return false;
@@ -26,7 +29,7 @@ namespace LoginRegConsole.Helper
             }
             else 
             {
-				foreach (User user in AppDbContext.AppUsers)
+				foreach (User user in userRepository.GetUsers())
 				{
 					if (user.Email.ToLower() == eMail.ToLower())
 					{

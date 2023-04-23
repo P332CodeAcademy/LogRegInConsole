@@ -30,10 +30,12 @@ namespace LoginRegConsole.Client.Commands
 			{
 				userRepository.RemoveUser(UserService.ActiveUser);	
 				CustomConsole.WarningLine($"{UserService.ActiveUser.ShowFullName()} has successfully been deleted!");
+				return;
 			}
 			else
 			{
 				CustomConsole.RedLine("Invalid password");
+				return;
 			}
 
 		}

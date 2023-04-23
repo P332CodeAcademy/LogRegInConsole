@@ -11,11 +11,15 @@ namespace LoginRegConsole.Database.Repositories
 {
 	public class MessageRepository
 	{
+		public List<Message> GetMessages()
+		{
+			return AppDbContext.Messages;
+		}
 		public void ViewMessages()
 		{
 
 			int counter = 1;
-			foreach (Message message in AppDbContext.Messages)
+			foreach (Message message in GetMessages())
 			{
 				if (message.ReceivingUser.Email == UserService.ActiveUser.Email)
 				{
@@ -30,7 +34,6 @@ namespace LoginRegConsole.Database.Repositories
 
 
 		}
-
 		public void AddMessage(Message message)
 		{
 			AppDbContext.Messages.Add(message);

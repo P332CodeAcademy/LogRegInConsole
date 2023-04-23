@@ -11,7 +11,7 @@ namespace LoginRegConsole.Database
 {
     public class AppDbContext
     {
-        public static UserRepository _userRepository = new UserRepository();
+        private static UserRepository _userRepository = new UserRepository();
         public static List<User> AppUsers { get; set; } = new List<User>();
         public static List<Message> Messages { get; set; } = new List<Message>();
 

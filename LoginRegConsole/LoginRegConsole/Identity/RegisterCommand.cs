@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using LoginRegConsole.Services;
 using LoginRegConsole.Extras;
 using LoginRegConsole.Constants;
+using LoginRegConsole.Database.Repositories;
 
 namespace LoginRegConsole.Identity
 {
@@ -15,6 +16,8 @@ namespace LoginRegConsole.Identity
     {
         public static void Register()
         {
+            UserRepository userRepository = new UserRepository();
+
             string name = RegistrationHelper.NameValidation();
             string surname = RegistrationHelper.SurnameValidation();
             string password = RegistrationHelper.PasswordValidation();
@@ -23,9 +26,9 @@ namespace LoginRegConsole.Identity
             User user = new User(name, surname, eMail, password, Roles.USER);
 
             CustomConsole.GreenLine($"{user.Name} {user.Surname} Successfully registered at {user.RegistrationDate.ToString("f")}");
-            AppDbContext.AppUsers.Add(user);
-
+            userRepository.AddUser(user);
 
         }
+        
     }
 }
