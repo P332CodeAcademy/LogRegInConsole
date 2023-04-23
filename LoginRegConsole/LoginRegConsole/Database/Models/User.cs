@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoginRegConsole.Database.BaseModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,23 +7,15 @@ using System.Threading.Tasks;
 
 namespace LoginRegConsole.Database.Models
 {
-	public class User
+	public class User : Human
 	{
 		private static int _idCounter { get; set; }
 		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Surname { get; set; }
 		public string Email { get; set; }
 		public string Password { get; set; }
 		public string Role { get; set; }
 		public bool IsActive { get; set; }
 		public DateTime RegistrationDate { get; set; } = DateTime.Now;
-
-
-		public User()
-		{
-
-		}
 
 		public User(string name, string surname, string email, string password, string role)
 		{

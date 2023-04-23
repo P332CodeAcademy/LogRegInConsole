@@ -10,6 +10,10 @@ namespace LoginRegConsole.Database.Repositories
 {
 	public class UserRepository
 	{
+		public List<User> GetUsers()
+		{
+			return AppDbContext.AppUsers;
+		}
 		public User FindUserByEmail()
 		{
 			Console.Write("Please enter the User email:");
@@ -78,7 +82,12 @@ namespace LoginRegConsole.Database.Repositories
 			int counter = 1;
 			foreach (User user in AppDbContext.AppUsers)
 			{
-				Console.WriteLine($"{counter++} || ID:{user.Id} || Name:{user.ShowFullName()} || Role:{user.Role} || IsActive:{(user.IsActive ? "Active" : "Banned")}");
+				Console.WriteLine($"{counter++} || ID:{user.Id} " +
+					$"|| Fullname:{user.ShowFullName()} " +
+					$"|| Email:{user.Email} " +
+					$"|| Role:{user.Role} " +
+					$"|| IsActive:{(user.IsActive ? "Active" : "Banned")}" +
+					$"|| Registartion Date:{user.RegistrationDate.ToString("f")}");
 			}
 			Console.WriteLine();
 		}

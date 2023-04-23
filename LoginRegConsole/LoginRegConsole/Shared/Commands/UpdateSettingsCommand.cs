@@ -11,7 +11,6 @@ namespace LoginRegConsole.Shared.Commands
 {
     public class UpdateSettingsCommand
     {
-
         public static void Handle()
         {
             string updatedName = RegistrationHelper.NameValidation();

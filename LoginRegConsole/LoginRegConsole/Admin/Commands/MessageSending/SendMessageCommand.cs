@@ -34,7 +34,7 @@ namespace LoginRegConsole.Admin.Commands.MessageSending
 				Console.WriteLine("Please enter the message");
 				messageBody = Console.ReadLine();
 
-			} while (Validation.IsLengthBeetween(10, 30, messageBody) == false);
+			} while (Validation.IsLengthBeetween(5, 50, messageBody) == false);
 
 			Message message = new Message(messageBody, UserService.ActiveUser, receivingUser);
 			messageRepository.AddMessage(message);
