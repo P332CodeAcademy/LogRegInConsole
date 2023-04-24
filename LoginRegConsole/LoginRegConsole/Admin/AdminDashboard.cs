@@ -47,7 +47,7 @@ namespace LoginRegConsole.Admin
                 switch (choice)
                 {
                     case "1":
-						userRepository.ShowUsers();
+						ShowUsers.Handle();
                         break;
                     case "2":
 						userRepository.RemoveUserById();

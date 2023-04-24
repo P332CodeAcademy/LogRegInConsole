@@ -77,20 +77,6 @@ namespace LoginRegConsole.Database.Repositories
 				}
 			}
 		}
-		public void ShowUsers()
-		{
-			int counter = 1;
-			foreach (User user in GetUsers())
-			{
-				Console.WriteLine($"{counter++} || ID:{user.Id} " +
-					$"|| Fullname:{user.ShowFullName()} " +
-					$"|| Email:{user.Email} " +
-					$"|| Role:{user.Role} " +
-					$"|| IsActive:{(user.IsActive ? "Active" : "Banned")}" +
-					$"|| Registartion Date:{user.RegistrationDate.ToString("f")}");
-			}
-			Console.WriteLine();
-		}
 		public void AddUser(User user)
 		{
 			AppDbContext.AppUsers.Add(user);

@@ -1,4 +1,5 @@
-﻿using LoginRegConsole.Helper;
+﻿using LoginRegConsole.Constants;
+using LoginRegConsole.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +16,15 @@ namespace LoginRegConsole.Services
             while (true)
             {
 
-                const int MIN_LENGTH_NAME = 3;
-                const int MAX_LENGTH_NAME = 30;
+                
 
                 Console.WriteLine("Please enter the name");
                 name = Console.ReadLine();
-                if (Validation.IsLengthBeetween(MIN_LENGTH_NAME, MAX_LENGTH_NAME, name) == true)
+                if (Validation.IsLengthBeetween(InputLengthValidations.MIN_LENGTH_NAME, InputLengthValidations.MAX_LENGTH_NAME, name) == true)
                 {
                     return name;
                 }
-                Console.WriteLine($"Length must be beetween {MIN_LENGTH_NAME} and {MAX_LENGTH_NAME} ");
+                Console.WriteLine($"Length must be beetween {InputLengthValidations.MIN_LENGTH_NAME} and {InputLengthValidations.MAX_LENGTH_NAME} ");
 
             }
         }
@@ -34,17 +34,16 @@ namespace LoginRegConsole.Services
             string surname = string.Empty;
             while (true)
             {
-                const int MİN_LENGTH_SURNAME = 5;
-                const int MAX_LENGTH_SURNAME = 20;
+                
 
                 Console.WriteLine("Please enter the surname");
                 surname = Console.ReadLine();
 
-                if (Validation.IsLengthBeetween(MİN_LENGTH_SURNAME, MAX_LENGTH_SURNAME, surname) == true)
+                if (Validation.IsLengthBeetween(InputLengthValidations.MİN_LENGTH_SURNAME, InputLengthValidations.MAX_LENGTH_SURNAME, surname) == true)
                 {
                     return surname;
                 }
-                Console.WriteLine($"Length must be beetween {MİN_LENGTH_SURNAME} and {MAX_LENGTH_SURNAME} ");
+                Console.WriteLine($"Length must be beetween {InputLengthValidations.MİN_LENGTH_SURNAME} and {InputLengthValidations.MAX_LENGTH_SURNAME} ");
 
 
             }
