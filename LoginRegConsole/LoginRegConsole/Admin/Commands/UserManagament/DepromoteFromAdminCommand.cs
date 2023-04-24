@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LoginRegConsole.Admin.Commands.UserManagament
 {
-	public class DepromoteFromAdmin
+	public class DepromoteFromAdminCommand
 	{
 		public static void Handle()
 		{

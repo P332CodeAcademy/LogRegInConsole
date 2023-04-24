@@ -18,6 +18,7 @@ namespace LoginRegConsole.Client
     {
         public static void Index()
         {
+            UpdateSettingsForUserCommand updateSettingsForUser = new UpdateSettingsForUserCommand();
             CustomConsole.WarningLine($"Welcome back {UserService.ActiveUser.Name} {UserService.ActiveUser.Surname}");
             string choice = string.Empty;
             MessageRepository messageRepository = new MessageRepository(); 
@@ -34,7 +35,7 @@ namespace LoginRegConsole.Client
                 switch (choice)
                 {
                     case "1":
-                        UpdateSettingsCommand.Handle();
+						updateSettingsForUser.Handle();
                         break;
                     case "2":
                         CloseAccountCommand.Handle();

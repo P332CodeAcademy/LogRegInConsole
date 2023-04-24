@@ -11,15 +11,12 @@ namespace LoginRegConsole.Shared.Commands
 {
     public class UpdateSettingsCommand
     {
-        public static void Handle()
+        public virtual void Handle()
         {
-            string updatedName = RegistrationHelper.NameValidation();
-            string updatedSurname = RegistrationHelper.SurnameValidation();
-            string updatedPassword = RegistrationHelper.PasswordValidation();
+			UserService.ActiveUser.Name = RegistrationHelper.NameValidation();
+			UserService.ActiveUser.Surname = RegistrationHelper.SurnameValidation();
+			UserService.ActiveUser.Password = RegistrationHelper.PasswordValidation();
 
-			UserService.ActiveUser.Name = updatedName;
-			UserService.ActiveUser.Surname = updatedSurname;
-			UserService.ActiveUser.Password = updatedPassword;
             CustomConsole.GreenLine("Successfully updated!");
         }
     }

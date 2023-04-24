@@ -1,5 +1,6 @@
 ﻿using LoginRegConsole.Admin.Commands.MessageSending;
 using LoginRegConsole.Admin.Commands.UserManagament;
+using LoginRegConsole.Client.Commands;
 using LoginRegConsole.Database.Models;
 using LoginRegConsole.Database.Repositories;
 using LoginRegConsole.Extras;
@@ -23,7 +24,7 @@ namespace LoginRegConsole.Admin
         public static void Index()
         {
             CustomConsole.GreenLine($"Welcome back to Admin Dashboard dear {UserService.ActiveUser.Name} {UserService.ActiveUser.Surname}");
-
+            UpdateSettingsForAdminCommand updateSettingsForAdminCommand = new UpdateSettingsForAdminCommand();
             string choice = string.Empty;
             UserRepository userRepository= new UserRepository();    
             do
@@ -55,10 +56,10 @@ namespace LoginRegConsole.Admin
                         PromoteToAdmin.Handle();
                         break;
                     case "4":
-                        DepromoteFromAdmin.Handle();
+                        DepromoteFromAdminCommand.Handle();
                         break;
                     case "5":
-                        UpdateSettingsCommand.Handle();
+						updateSettingsForAdminCommand.Handle();
                         break;
                     case "6":
 						userRepository.RemoveUserByEmail();
